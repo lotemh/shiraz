@@ -22,7 +22,7 @@ var updateFoodOfTheDayIndex = function(){
         foodOfTheDayIndex = 0;
 };
 
-app.use('/', express.static(__dirname));
+app.use('/', express.static(__dirname + '/public'));
 
 app.get('/getFood', function(req, res){
     res.send(getFoodOfTheDay());
