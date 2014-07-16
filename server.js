@@ -28,4 +28,4 @@ app.get('/getFood', function(req, res){
     res.send(getFoodOfTheDay());
 });
 
-var server = app.listen(3000);
+var server = app.listen(1337);
