@@ -1,6 +1,6 @@
 var express = require('express');
 var bodyParser = require('body-parser');
-var config = require('config');
+var config = require('./config');
 var app = express();
 
 var placesToEat = ['גבאי', 'סירים']; //and so on...
