@@ -13,7 +13,9 @@ function getFoodOfTheDay() {
     var dateOfToday = new Date();
     if (dateOfToday.getMonth() === lastDayOfUpdate.getMonth()
         &&
-        dateOfToday.getDate() !== lastDayOfUpdate.getDate()) {
+        dateOfToday.getDate() !== lastDayOfUpdate.getDate()
+		&& dateOfToday.getDay() !== 5
+		&& dateOfToday.getDay() !== 6) {
         updateFoodOfTheDayIndex();
     }
     return placesToEat[foodOfTheDayIndex];
