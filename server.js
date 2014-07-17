@@ -1,13 +1,15 @@
 var express = require('express');
 var bodyParser = require('body-parser');
-var config = require('./config');
+var config = require('./config.json');
+var restaurants = require('./restaurants.json');
 var app = express();
 
-var placesToEat = ['גבאי', 'סירים']; //and so on...
+var placesToEatOld = ['גבאי', 'סירים']; //and so on...
+var placesToEat = restaurants.data;
 var lastDayOfUpdate = new Date();
 var foodOfTheDayIndex = 0;
 
-var getFoodOfTheDay = function() {
+function getFoodOfTheDay() {
     var dateOfToday = new Date();
     if (dateOfToday.getMonth() === lastDayOfUpdate.getMonth()
         &&
@@ -17,10 +19,8 @@ var getFoodOfTheDay = function() {
     return placesToEat[foodOfTheDayIndex];
 };
 
-var updateFoodOfTheDayIndex = function(){
-    foodOfTheDayIndex++;
-    if (foodOfTheDayIndex >= placesToEat.length)
-        foodOfTheDayIndex = 0;
+function updateFoodOfTheDayIndex(){
+	foodOfTheDayIndex = (foodOfTheDayIndex+1) % placesToEat.length;
 };
 
 app.use('/', express.static(__dirname + '/public'));
@@ -30,3 +30,22 @@ app.get('/getFood', function(req, res){
 });
 
 var server = app.listen(config.port);
+
+
+
+/*
+//file1:
+function x() {}
+
+module.exports = {
+	x: x
+}
+
+file2:
+
+var bla = require('./file1.js')
+
+bla.x()
+
+
+*/
