@@ -4,7 +4,6 @@ var config = require('./config.json');
 var restaurants = require('./restaurants.json');
 var app = express();
 
-var placesToEatOld = ['גבאי', 'סירים']; //and so on...
 var placesToEat = restaurants.data;
 var lastDayOfUpdate = new Date();
 var foodOfTheDayIndex = 0;
@@ -18,6 +17,7 @@ function getFoodOfTheDay() {
 		&& dateOfToday.getDay() !== 6) {
         updateFoodOfTheDayIndex();
     }
+	lastDayOfUpdate = dateOfToday;
     return placesToEat[foodOfTheDayIndex];
 };
 
