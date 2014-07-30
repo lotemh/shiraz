@@ -8,7 +8,6 @@ var app = express();
 
 var placesToEat = restaurants.data;
 var lastDayOfUpdate = new Date();
-//var foodOfTheDayIndex = 0;
 
 function getFoodOfTheDay() {
 	var foodOfTheDayIndex = getFoodOfTheDayIndex();
@@ -26,7 +25,6 @@ function getFoodOfTheDay() {
 };
 
 function updateFoodOfTheDayIndex(index){
-	//foodOfTheDayIndex = (foodOfTheDayIndex+1) % placesToEat.length;
 	return (index+1) % placesToEat.length;
 };
 
@@ -37,7 +35,7 @@ function getFoodOfTheDayIndex(){
 app.use('/', express.static(__dirname + '/public'));
 
 app.get('/getFood', function(req, res){
-    res.send(getFoodOfTheDay());
+    res.send(getFoodOfTheDay(), "Shook");
 });
 
 var server = app.listen(config.port);
