@@ -19,11 +19,11 @@ function setRandomRestaurant() {
                 url: 'getFood',
                 dataType: 'text',
                 type: 'GET',
-                success: function(foodPlace){
+                success: function(foodPlace, atlFood){
                     document.getElementById("baloonText").innerHTML = foodPlace;
 					document.getElementById("baloonElement").style.visibility = "visible";
 					
-					document.getElementById("altText").innerHTML = foodPlace;
+					document.getElementById("altText").innerHTML = atlFood;
 					document.getElementById("alternativeFood").style.visibility = "visible";
                 }.bind(this),
                 error: function(xhr, status, err){

@@ -35,7 +35,7 @@ function getFoodOfTheDayIndex(){
 app.use('/', express.static(__dirname + '/public'));
 
 app.get('/getFood', function(req, res){
-    res.send(getFoodOfTheDay(), "Shook");
+    res.send(getFoodOfTheDay(), 'shook');
 });
 
 var server = app.listen(config.port);
