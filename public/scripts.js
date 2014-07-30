@@ -22,6 +22,9 @@ function setRandomRestaurant() {
                 success: function(foodPlace){
                     document.getElementById("baloonText").innerHTML = foodPlace;
 					document.getElementById("baloonElement").style.visibility = "visible";
+					
+					document.getElementById("altText").innerHTML = foodPlace;
+					document.getElementById("alternativeFood").style.visibility = "visible";
                 }.bind(this),
                 error: function(xhr, status, err){
                     console.error("", status, err.toString());
@@ -34,6 +37,7 @@ function setRandomPopsicle() {
 }
 
 function setRandomElement(elementArray) {
+	document.getElementById("alternativeFood").style.visibility = "hidden";
 	var randomNumber = Math.floor(Math.random()*elementArray.length);
 	document.getElementById("baloonElement").style.visibility = "visible";
 	document.getElementById("baloonText").innerHTML = elementArray[randomNumber];

@@ -36,6 +36,13 @@
 	right: 50%;
 }
 
+#alternativeFood {
+	position: absolute; 
+	top: 50%; 
+	left: 10%;
+	visibility: hidden;
+}
+
 .btn {
   position: relative; 
   margin: 10px auto;
