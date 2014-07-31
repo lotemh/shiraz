@@ -32,10 +32,18 @@ function getFoodOfTheDayIndex(){
 	return state.read('foodOfTheDayIndex');
 }
 
+function getFoodPlaces(){
+	return placesToEat;
+}
+
 app.use('/', express.static(__dirname + '/public'));
 
 app.get('/getFood', function(req, res){
     res.send(getFoodOfTheDay());
+});
+
+app.get('/getFoodPlaces', function(req, res){
+    res.send(getFoodPlaces());
 });
 
 var server = app.listen(config.port);
