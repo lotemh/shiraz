@@ -15,21 +15,43 @@ var popsicleArray = [
 
 function setRandomRestaurant() {
 
+	var todaysFoodPlace;
+
+	 $.ajax({
+                 url: 'getFood',
+                 dataType: 'text',
+                 type: 'GET',
+                 success: function(foodPlace){
+					 todaysFoodPlace = foodPlace;
+                     document.getElementById("baloonText").innerHTML = foodPlace;
+					 document.getElementById("baloonElement").style.visibility = "visible";		
+                 }.bind(this),
+                 error: function(xhr, status, err){
+                     console.error("", status, err.toString());
+                 }.bind(this)
+             });
+			
 	$.ajax({
-                url: 'getFood',
-                dataType: 'text',
-                type: 'GET',
-                success: function(foodPlace){
-                    document.getElementById("baloonText").innerHTML = foodPlace;
-					document.getElementById("baloonElement").style.visibility = "visible";
-					
-					document.getElementById("altText").innerHTML = "Sirim";
-					document.getElementById("alternativeFood").style.visibility = "visible";
-                }.bind(this),
-                error: function(xhr, status, err){
-                    console.error("", status, err.toString());
-                }.bind(this)
-            });
+		url: 'getFoodPlaces',
+		dataType: 'json',
+		type: 'GET',
+		success: function(restaurants){
+			document.getElementById("altText").innerHTML = getAlternativeFoodPlace(todaysFoodPlace, restaurants, 4);
+			document.getElementById("alternativeFood").style.visibility = "visible";
+		}.bind(this),
+		error: function(xhr, status, err){
+			console.error("", status, err.toString());
+		}.bind(this)
+	});
+}
+
+function getAlternativeFoodPlace(todaysFoodPlace, restaurants, retries){
+	for (var i = 0; i < retries; i++){
+		var placeToEat = getRandomElement(restaurants);
+		if (placeToEat !== todaysFoodPlace)
+			return placeToEat;
+	}
+	return todaysFoodPlace;
 }
 
 function setRandomPopsicle() {
@@ -38,7 +60,11 @@ function setRandomPopsicle() {
 
 function setRandomElement(elementArray) {
 	document.getElementById("alternativeFood").style.visibility = "hidden";
-	var randomNumber = Math.floor(Math.random()*elementArray.length);
 	document.getElementById("baloonElement").style.visibility = "visible";
-	document.getElementById("baloonText").innerHTML = elementArray[randomNumber];
+	document.getElementById("baloonText").innerHTML = getRandomElement(elementArray);
+}
+
+function getRandomElement(arr){
+	var randomNumber = Math.floor(Math.random()*arr.length);
+	return arr[randomNumber];
 }
