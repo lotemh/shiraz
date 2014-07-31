@@ -36,7 +36,10 @@ function setRandomRestaurant() {
 		dataType: 'json',
 		type: 'GET',
 		success: function(restaurants){
-			document.getElementById("altText").innerHTML = getAlternativeFoodPlace(todaysFoodPlace, restaurants, 4);
+			var maybeText = "Or Maybe: ";
+			var text = document.getElementById("altText");
+			var withoutPlaces = [todaysFoodPlace, text.innerHTML.replace(maybeText, "")];
+			text.innerHTML = maybeText + getAlternativeFoodPlace(restaurants, withoutPlaces, 4);
 			document.getElementById("alternativeFood").style.visibility = "visible";
 		}.bind(this),
 		error: function(xhr, status, err){
@@ -45,10 +48,10 @@ function setRandomRestaurant() {
 	});
 }
 
-function getAlternativeFoodPlace(todaysFoodPlace, restaurants, retries){
+function getAlternativeFoodPlace(restaurants, withoutPlaces, retries){
 	for (var i = 0; i < retries; i++){
 		var placeToEat = getRandomElement(restaurants);
-		if (placeToEat !== todaysFoodPlace)
+		if (withoutPlaces.indexOf(placeToEat) === -1) 
 			return placeToEat;
 	}
 	return todaysFoodPlace;

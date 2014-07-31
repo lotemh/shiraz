@@ -38,9 +38,10 @@
 
 #alternativeFood {
 	position: absolute; 
-	top: 50%; 
-	left: 10%;
+	top: 60%; 
+	left: 5%;
 	visibility: hidden;
+	display: inline-block;
 }
 
 .btn {
