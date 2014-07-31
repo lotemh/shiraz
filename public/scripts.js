@@ -18,17 +18,17 @@ function setRandomRestaurant() {
 	var todaysFoodPlace;
 
 	 $.ajax({
-                 url: 'getFood',
-                 dataType: 'text',
-                 type: 'GET',
-                 success: function(foodPlace){
-					 todaysFoodPlace = foodPlace;
-                     document.getElementById("baloonText").innerHTML = foodPlace;
-					 document.getElementById("baloonElement").style.visibility = "visible";		
-                 }.bind(this),
-                 error: function(xhr, status, err){
+				url: 'getFood',
+                dataType: 'text',
+                type: 'GET',
+                success: function(foodPlace){
+					todaysFoodPlace = foodPlace;
+                    document.getElementById("baloonText").innerHTML = foodPlace;
+					document.getElementById("baloonElement").style.visibility = "visible";		
+                }.bind(this),
+                error: function(xhr, status, err){
                      console.error("", status, err.toString());
-                 }.bind(this)
+                }.bind(this)
              });
 			
 	$.ajax({
@@ -36,16 +36,20 @@ function setRandomRestaurant() {
 		dataType: 'json',
 		type: 'GET',
 		success: function(restaurants){
-			var maybeText = "Or Maybe: ";
-			var text = document.getElementById("altText");
-			var withoutPlaces = [todaysFoodPlace, text.innerHTML.replace(maybeText, "")];
-			text.innerHTML = maybeText + getAlternativeFoodPlace(restaurants, withoutPlaces, 4);
-			document.getElementById("alternativeFood").style.visibility = "visible";
+			setAlternativeFoodPlace(todaysFoodPlace, restaurants);
 		}.bind(this),
 		error: function(xhr, status, err){
 			console.error("", status, err.toString());
 		}.bind(this)
 	});
+}
+
+function setAlternativeFoodPlace(todaysFoodPlace, restaurants){
+	var maybeText = "Or Maybe: ";
+	var text = document.getElementById("altText");
+	var withoutPlaces = [todaysFoodPlace, text.innerHTML.replace(maybeText, "")];
+	text.innerHTML = maybeText + getAlternativeFoodPlace(restaurants, withoutPlaces, 4);
+	document.getElementById("alternativeFood").style.visibility = "visible";
 }
 
 function getAlternativeFoodPlace(restaurants, withoutPlaces, retries){
