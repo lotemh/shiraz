@@ -14,33 +14,56 @@ var popsicleArray = [
 ];
 
 function setRandomRestaurant() {
-
 	var todaysFoodPlace;
 
-	 $.ajax({
-				url: 'getFood',
-                dataType: 'text',
-                type: 'GET',
-                success: function(foodPlace){
-					todaysFoodPlace = foodPlace;
-                    document.getElementById("baloonText").innerHTML = foodPlace;
-					document.getElementById("baloonElement").style.visibility = "visible";		
-                }.bind(this),
-                error: function(xhr, status, err){
-                     console.error("", status, err.toString());
-                }.bind(this)
-             });
-			
+	 getFoodPlace(function(foodPlace){
+		todaysFoodPlace = foodPlace;
+		document.getElementById("baloonText").innerHTML = foodPlace;
+		document.getElementById("baloonElement").style.visibility = "visible";	
+	 });
+			 
+	getRestaurants( function(restaurants){
+		setAlternativeFoodPlace(todaysFoodPlace, restaurants);
+	});		 
+}
+
+function getRestaurants(callback){
 	$.ajax({
 		url: 'getFoodPlaces',
 		dataType: 'json',
 		type: 'GET',
 		success: function(restaurants){
-			setAlternativeFoodPlace(todaysFoodPlace, restaurants);
+			callback(restaurants);
 		}.bind(this),
 		error: function(xhr, status, err){
 			console.error("", status, err.toString());
 		}.bind(this)
+	});
+}
+
+function getFoodPlace(callback){
+	$.ajax({
+			url: 'getFood',
+            dataType: 'text',
+            type: 'GET',
+            success: function(foodPlace){
+				callback(foodPlace);	
+            }.bind(this),
+            error: function(xhr, status, err){
+				console.error("", status, err.toString());
+            }.bind(this)
+    });
+}
+
+function showRestaurants(){
+	getRestaurants(function(restaurants){
+		var list = document.createElement('ul');
+		document.getElementById('restaurants').appendChild(list);
+		restaurants.forEach(function(rest){
+			var elm = document.createElement('li'); 
+			elm.innerHTML = rest; 
+			list.appendChild(elm);
+		});
 	});
 }
 

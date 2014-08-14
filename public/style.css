@@ -1,3 +1,39 @@
+#header {
+	background-color: black;
+	display: block;
+	height: 50px;
+}
+
+.siteTitle {
+	float: right;
+	margin: 0.1em 0.4em 0.1em 0.1em;
+	color: #FFFFCC;
+	font-weight: normal;
+	font-family: 'Ultra', sans-serif;  
+	right: 10px;	
+	font-size: 30px;	
+	text-align: right;
+	line-height: 42px;
+	text-transform: uppercase;
+	text-shadow: 0 2px white, 0 3px #777;
+}
+
+.signinBtn {
+	padding: 0.55em; 	
+	display: inline-block;
+}
+
+.hidden {
+	display: none;
+}
+
+.userNameBtn {
+	color: white;
+	padding: 1em;
+	display: inline-block;
+	float: left;
+}
+
 .baloonImage {
 	position: relative; 
 	background: url(http://lunchtime.uphero.com/img/baloon.png); 
@@ -17,6 +53,10 @@
     color: black;
 }
 
+#results {
+	float: left;
+}
+
 #baloonElement {
 	position: absolute; 
 	top: 10%; 
@@ -25,9 +65,10 @@
 }
 
 #buttonContainer {
-	position: absolute;
-	top: 80%;
-	right: 15%;
+	position: relative;
+	float: right;
+	right: 10px;
+	direction: rtl;
 }
 
 #shiraz {
@@ -46,14 +87,16 @@
 
 .btn {
   position: relative; 
-  margin: 10px auto;
-  padding: 1.6em 1em;
-  max-width: 20em;
+  display: block;
+  margin: 10px 0px;
+  padding: 1.1em 0.3em;
+  width: 10em;
   color: black;
   font-size: 1em;
   font-weight: bold;
   line-height: 1;
   text-align: center;
+  font-size: 17px;	
   text-decoration: none;
   background-color: #FFFFCC;
   background-image:linear-gradient(#5fc1ff 0%, #0088de 100%);
@@ -62,17 +105,3 @@
   box-shadow: inset 0 0 7px 0 rgba(white, 0.5);
   }
   
-.siteTitle {
-	position: absolute;
-	margin: 0.5em 0 0.5em 0;
-	color: #FFFFCC;
-	font-weight: normal;
-	font-family: 'Ultra', sans-serif;  
-	top: 1%;	
-	right: 5%;	
-	font-size: 74px;
-	text-align: right;
-	line-height: 42px;
-	text-transform: uppercase;
-	text-shadow: 0 2px white, 0 3px #777;
-}

@@ -6,27 +6,75 @@
         <link rel="stylesheet" type="text/css" href="style.css" />
         <script src="scripts.js" type="text/javascript" charset="utf-8"></script>
 		<script src="http://code.jquery.com/jquery-1.10.0.min.js"></script>
-	</head>
-	<body style="background-color: #808080 ">
-	<h1 class="siteTitle">&#1491;&#1497;&#1500;&#1502;&#1514; &#1492;&#1510;&#1492;&#1512;&#1497;&#1497;&#1501; &#1492;&#1497;&#1493;&#1502;&#1497;&#1514;</h1> 
 		
+		<script type="text/javascript">
+      (function() {
+       var po = document.createElement('script'); 
+	   po.type = 'text/javascript'; 
+	   po.async = true;
+       po.src = 'https://apis.google.com/js/client:plusone.js';
+       var s = document.getElementsByTagName('script')[0]; 
+	   s.parentNode.insertBefore(po, s);
+     })();
+	 
+	 //callback function after login request
+	 function signinCallback(authResult) {
+  if (authResult['status']['signed_in']) {
+    // Update the app to reflect a signed in user
+    // Hide the sign-in button now that the user is authorized, for example:
+    document.getElementById('signinButton').setAttribute('style', 'display: none');
+	document.getElementById('userName').innerHTML = "user is signed in";
+	document.getElementById('userName').classList.add("userNameBtn");
+	document.getElementById('userName').classList.remove("hidden");
+	console.log("sign in succeeded: " + JSON.stringify(authResult));
+  } else {
+    // Update the app to reflect a signed out user
+    // Possible error values:
+    //   "user_signed_out" - User is signed-out
+    //   "access_denied" - User denied access to your app
+    //   "immediate_failed" - Could not automatically log in the user
+    console.log('Sign-in state: ' + authResult['error']);
+  }
+}
+    </script>
+	</head>
+	
+	<body style="background-color: #808080 ">
+	<div id="header">
+	<h1 class="siteTitle">&#1491;&#1497;&#1500;&#1502;&#1514; &#1492;&#1510;&#1492;&#1512;&#1497;&#1497;&#1501; &#1492;&#1497;&#1493;&#1502;&#1497;&#1514;</h1> 
+	<span id="signinButton" class="signinBtn">
+		<span
+			class="g-signin"
+			data-callback="signinCallback"
+			data-clientid="415328212568-29gaqsi5ur3c0v478f052uht67h6kmdm.apps.googleusercontent.com"
+			data-cookiepolicy="single_host_origin"
+			data-requestvisibleactions="http://schema.org/AddAction"
+			data-scope="https://www.googleapis.com/auth/plus.login">
+		</span>
+	</span>
+	<div id="userName" class="hidden"></div>
+	</div>
 		<div id="shiraz">
 			<img src="http://lunchtime.uphero.com/img/shirCrop.PNG"/>
 		</div>
-		<div id="baloonElement">
-		<div class="baloonImage">
-			<div class="restStyle"">
-				<p id="baloonText"></p>
+		<div id="results">
+			<div id="baloonElement">
+				<div class="baloonImage">
+					<div class="restStyle"">
+						<p id="baloonText"></p>
+					</div>
+				</div>
 			</div>
-		</div>
-		</div>
-		<div id="alternativeFood">
-			<h1 id="altText"></h1>
+			<div id="alternativeFood">
+				<h1 id="altText"></h1>
+			</div>
+			<div id="restaurants"></div>
 		</div>
 		<div id="buttonContainer">
 			<button class="btn" dir="rtl" lang="ar" onclick="setRandomRestaurant()">&#1488;&#1494; &#1502;&#1492; &#1488;&#1493;&#1499;&#1500;&#1497;&#1501; &#1513;&#1497;&#1512;&#1494;?</button>
 		
 			<button class="btn" dir="rtl" lang="ar" onclick="setRandomPopsicle()">&#1499;&#1489;&#1488;&#1512;&#1496;&#1497;&#1511;?</button>
+			<button class="btn" onclick="showRestaurants()"> רשימת המסעדות </button> 
 		</div>
 	</body>
 </html> 
